@@ -50,20 +50,20 @@ class CalendarViewController : UIViewController
         
         leftButton.rx.tap
             .subscribe(onNext: onLeftClick)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         rightButton.rx.tap
             .subscribe(onNext: onRightClick)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel
             .currentVisibleCalendarDateObservable
             .subscribe(onNext: onCurrentCalendarDateChanged)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.dateObservable.skip(1)
             .subscribe(onNext: onCurrentlySelectedDateChanged)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         calendarView.reloadData()
     }

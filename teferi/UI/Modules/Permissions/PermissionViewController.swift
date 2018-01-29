@@ -34,12 +34,12 @@ class PermissionViewController : UIViewController
         enableButton.rx.tap
             .flatMapLatest(getUserPermission)
             .subscribe(onNext: onPermissionGiven)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         secondaryButton
             .rx.tap
             .subscribe(onNext: onSecondaryButtonTapped)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         initializeBindings()
     }
@@ -50,7 +50,7 @@ class PermissionViewController : UIViewController
     {
         viewModel.hideOverlayObservable
             .subscribe(onNext: hideOverlay)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         titleLabel.text = viewModel.titleText
         descriptionLabel.text = viewModel.descriptionText

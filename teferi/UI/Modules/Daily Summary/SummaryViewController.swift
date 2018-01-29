@@ -32,31 +32,31 @@ class SummaryViewController: UIViewController
         titleLabel.text = L10n.dailySummaryTitle
         
         summaryPageViewModel.dateObservable
-            .bindTo(dateLabel.rx.text)
-            .addDisposableTo(disposableBag)
+            .bind(to: dateLabel.rx.text)
+            .disposed(by: disposableBag)
         
         summaryPageViewController.inject(viewModel: summaryPageViewModel, viewModelLocator: viewModelLocator)
         
         backButton.rx.tap
             .subscribe(onNext: { [unowned self] in self.summaryPageViewController.moveToPreviews() })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         forwardButton.rx.tap
             .subscribe(onNext: { [unowned self] in self.summaryPageViewController.moveToNext() })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         summaryPageViewController
             .canMoveForwardObservable
             .subscribe(onNext: { [unowned self] in self.forwardButton.isEnabled = $0 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         summaryPageViewController
             .canMoveBackwardObservable
             .subscribe(onNext: { [unowned self] in self.backButton.isEnabled = $0 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         closeButton.rx.tap
             .subscribe(onNext: { [unowned self] in self.dismiss(animated: true, completion: nil) } )
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }

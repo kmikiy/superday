@@ -76,11 +76,11 @@ class NewGoalViewController: UIViewController
             .subscribe(onNext: { [unowned self] in
                 self.presenter.dismiss()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         newGoalButton.rx.tap
             .subscribe(onNext: saveGoal)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private func saveGoal()

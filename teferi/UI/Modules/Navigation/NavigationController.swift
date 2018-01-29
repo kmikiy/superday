@@ -54,8 +54,8 @@ class NavigationController: UINavigationController
     private func bindViewModel()
     {
         viewModel.title
-            .bindTo(titleLabel.rx.text)
-            .addDisposableTo(disposeBag)
+            .bind(to: titleLabel.rx.text)
+            .disposed(by: disposeBag)
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool)

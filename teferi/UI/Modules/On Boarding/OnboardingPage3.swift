@@ -46,7 +46,7 @@ class OnboardingPage3 : OnboardingPage
         
         viewModel.locationAuthorizationChangedObservable
             .subscribe(onNext: finish)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     override func finish()

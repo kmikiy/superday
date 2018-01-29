@@ -52,7 +52,7 @@ class EditTimesViewController: UIViewController
             .merge()
             .filter({ $0 == nil }).mapTo(())
             .subscribe(onNext: presenter.dismiss)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.topSlotObservable
             .filterNil()
@@ -61,7 +61,7 @@ class EditTimesViewController: UIViewController
                 self.topSlot.startTime = slot.startTime
                 self.topSlot.duration = slot.duration
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.bottomSlotObservable
             .filterNil()
@@ -70,7 +70,7 @@ class EditTimesViewController: UIViewController
                 self.bottomSlot.startTime = slot.startTime
                 self.bottomSlot.duration = slot.duration
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         handle.color = viewModel.selectedSlotCategory.color
     }

@@ -17,7 +17,7 @@ class OnboardingPage4 : OnboardingPage
         viewModel.motionAuthorizationChangedObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: finish)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     override func finish()

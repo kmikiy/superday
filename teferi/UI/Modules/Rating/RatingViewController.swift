@@ -44,7 +44,7 @@ class RatingViewController: UIViewController
         
         starsView.selectionObservable
             .subscribe(onNext: finalizeRating)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.didShowRating()
     }

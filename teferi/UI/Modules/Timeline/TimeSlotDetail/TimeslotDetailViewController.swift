@@ -116,7 +116,7 @@ class TimeslotDetailViewController: UIViewController
                 }
                 self.slotTimelineItem = item
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Actions
@@ -222,7 +222,7 @@ extension TimeslotDetailViewController : UITableViewDataSource
                 cell.editView
                     .editEndedObservable
                     .subscribe(onNext: viewModel.updateSlotTimelineItem)
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
                 
                 setup(cell)
                 return cell
