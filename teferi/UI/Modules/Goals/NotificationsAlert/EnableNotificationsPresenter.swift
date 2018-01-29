@@ -20,7 +20,6 @@ class EnableNotificationsPresenter
         presenter.viewController = viewController
         
         return viewController
-        fatalError("Dont do this")
     }
     
     func dismiss()

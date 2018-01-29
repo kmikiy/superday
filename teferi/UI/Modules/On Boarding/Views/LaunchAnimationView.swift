@@ -55,7 +55,7 @@ class LaunchAnimationView : UIView
     }
     
     // MARK: Actions
-    func animate(onCompleted: @escaping (Void) -> Void)
+    func animate(onCompleted: @escaping () -> ())
     {
         let animationOrder = [0, 8, 2, 6, 1, 7, 3, 5, 4]
         
