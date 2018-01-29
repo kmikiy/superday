@@ -47,7 +47,7 @@ enum KNNDecisionType<ItemType, LabelType> where LabelType: Hashable
             })
             
             let instanceToUse = itemsWithSameLabel
-                .sorted(by: { $0.0.distance < $0.1.distance })
+                .sorted(by: { $0.distance < $1.distance })
                 .first!
                 .instance
             

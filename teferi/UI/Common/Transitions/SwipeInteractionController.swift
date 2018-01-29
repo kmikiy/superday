@@ -18,7 +18,7 @@ class SwipeInteractionController : UIPercentDrivenInteractiveTransition
         view.addGestureRecognizer(gesture)
     }
     
-    func handleGesture(recognizer: UIPanGestureRecognizer)
+    @objc func handleGesture(recognizer: UIPanGestureRecognizer)
     {
         let translation = recognizer.translation(in: recognizer.view!.superview!)
         let percent = translation.y / recognizer.view!.superview!.bounds.size.height

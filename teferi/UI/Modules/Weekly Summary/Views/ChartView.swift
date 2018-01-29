@@ -143,8 +143,8 @@ class ChartView: UIView
             ctx.addLine(to: CGPoint(x: rect.width, y: lineHeight))
             
             let text = NSAttributedString(string: "\(l * Int(hoursInterval)) h",
-                attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 11),
-                             NSForegroundColorAttributeName: Style.Color.gray])
+                attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 11),
+                             NSAttributedStringKey.foregroundColor: Style.Color.gray])
             text.draw(at: CGPoint(x: 16, y: lineHeight-16))
         }
 
@@ -269,9 +269,9 @@ class ChartView: UIView
             paragraphStyle.alignment = .center
             
             let text = NSAttributedString(string: label!,
-                                          attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 11),
-                                                       NSForegroundColorAttributeName: Style.Color.gray,
-                                                       NSParagraphStyleAttributeName: paragraphStyle])
+                                          attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 11),
+                                                       NSAttributedStringKey.foregroundColor: Style.Color.gray,
+                                                       NSAttributedStringKey.paragraphStyle: paragraphStyle])
             
             text.draw(in: CGRect(x: rect.origin.x + rect.width - CGFloat(page) * pageWidth + offset - 15,
                                  y: rect.height + 8,

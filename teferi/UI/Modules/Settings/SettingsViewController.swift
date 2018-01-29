@@ -26,12 +26,12 @@ class SettingsViewController: UIViewController
         
         versionLabel.numberOfLines = 0
         let boldAttributes = [
-            NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13),
-            NSForegroundColorAttributeName: UIColor.normalGray
+            NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 13),
+            NSAttributedStringKey.foregroundColor: UIColor.normalGray
         ]
         let regularAttributes = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 13),
-            NSForegroundColorAttributeName: UIColor.normalGray
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
+            NSAttributedStringKey.foregroundColor: UIColor.normalGray
         ]
         let title = NSMutableAttributedString(string: "Superday\n", attributes: boldAttributes)
         let version = NSAttributedString(string: viewModel.fullAppVersion, attributes: regularAttributes)

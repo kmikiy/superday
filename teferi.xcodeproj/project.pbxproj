@@ -1747,7 +1747,7 @@
 					240AC7131D748C8800F21F4F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = B227VTMZ94;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1767,7 +1767,7 @@
 					24A21B651D7C3E0800CEB4F3 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = B227VTMZ94;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 						TestTargetID = 240AC7131D748C8800F21F4F;
 					};
@@ -2478,7 +2478,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cfc8e697-502a-4db3-8c4d-cae41759df84";
 				PROVISIONING_PROFILE_SPECIFIER = "Superday Development";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2512,7 +2513,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1cd22f05-736e-49d3-be86-ab18861cfbfe";
 				PROVISIONING_PROFILE_SPECIFIER = Superday_AppStore;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2534,7 +2536,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.toggl.teferiTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/teferi.app/teferi";
 			};
 			name = Debug;
@@ -2555,7 +2558,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.toggl.teferiTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/teferi.app/teferi";
 			};
 			name = Release;
@@ -2636,7 +2640,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a7e946b5-1e09-4acc-8f94-7c08c16132b7";
 				PROVISIONING_PROFILE_SPECIFIER = Superday_AdHoc;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2658,7 +2663,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.toggl.teferiTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/teferi.app/teferi";
 			};
 			name = AdHoc;

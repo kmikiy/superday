@@ -75,7 +75,7 @@ class EditTimesViewController: UIViewController
         handle.color = viewModel.selectedSlotCategory.color
     }
     
-    func moveHandle(recognizer: UIPanGestureRecognizer)
+    @objc func moveHandle(recognizer: UIPanGestureRecognizer)
     {
         let yTranslation = recognizer.translation(in: view).y
         topConstraint.constant += yTranslation

@@ -49,10 +49,10 @@ class WeeklySummaryCategoryTableViewCell: UITableViewCell
         let string = stringFromTimeInterval(interval: interval)
         
         let attributedString = NSMutableAttributedString(string: string, attributes: [
-            NSForegroundColorAttributeName: Style.Color.gray
+            NSAttributedStringKey.foregroundColor: Style.Color.gray
             ])
         
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: Style.Color.darkGray, range: NSRange(location: 0, length: 5))
+        attributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Style.Color.darkGray, range: NSRange(location: 0, length: 5))
         
         return attributedString
     }

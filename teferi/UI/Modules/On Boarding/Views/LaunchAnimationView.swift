@@ -70,7 +70,7 @@ class LaunchAnimationView : UIView
         
         animateDot(dots[animationOrder[8]], duration: lastDuration, delay: 8 * interval)
 
-        Timer.schedule(withDelay: duration * 5) { _ in onCompleted() }
+        Timer.schedule(withDelay: duration * 5) {  onCompleted() }
     }
     
     private func animateDot(_ dot: CALayer, duration: Double, delay: Double)

@@ -169,7 +169,7 @@ class Alert: UIView
         })
     }
     
-    static func hide()
+    @objc static func hide()
     {
         guard let alert = Alert.currentAlert else { return }
         alert.hide()

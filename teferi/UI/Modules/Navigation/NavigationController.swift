@@ -29,7 +29,7 @@ class NavigationController: UINavigationController
         logoImageView = UIImageView(image: Image(asset: Asset.icSuperday))
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 60))
-        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         titleLabel.textColor = Style.Color.offBlack
         
         let crashTaps = UITapGestureRecognizer(target: self, action: #selector(NavigationController.showCrashDialog))

@@ -189,10 +189,10 @@ class CalendarViewController : UIViewController
     {
         let monthName = DateFormatter().monthSymbols[(date.month - 1) % 12]
         let result = NSMutableAttributedString(string: "\(monthName) ",
-                                               attributes: [ NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.systemFont(ofSize: 14) ])
+                                               attributes: [ NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14) ])
         
         result.append(NSAttributedString(string: String(date.year),
-                                         attributes: [ NSForegroundColorAttributeName: Style.Color.offBlackTransparent, NSFontAttributeName: UIFont.systemFont(ofSize: 14) ]))
+                                         attributes: [ NSAttributedStringKey.foregroundColor: Style.Color.offBlackTransparent, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14) ]))
         
         return result
     }
