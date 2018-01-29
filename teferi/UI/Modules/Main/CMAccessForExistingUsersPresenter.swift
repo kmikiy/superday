@@ -15,7 +15,7 @@ class CMAccessForExistingUsersPresenter
     {
         let presenter = CMAccessForExistingUsersPresenter(viewModelLocator: viewModelLocator)
         
-        let viewController = StoryboardScene.Main.instantiateCmAccessForExistingUsers()
+        let viewController = StoryboardScene.Main.cmAccessForExistingUsers.instantiate()
         let viewModel = viewModelLocator.getCMAccessForExistingUsersViewModel()
         viewController.inject(presenter: presenter, viewModel: viewModel)
         

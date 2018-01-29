@@ -36,7 +36,7 @@ class TimelineViewController : UIViewController
         }
     }
     
-    private let dataSource = TimelineDataSource()
+    private var dataSource: RxTableViewSectionedAnimatedDataSource<TimelineSection>!
 
     // MARK: Initializers
     init(presenter: TimelinePresenter, viewModel: TimelineViewModel)
@@ -45,6 +45,15 @@ class TimelineViewController : UIViewController
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
+        dataSource = RxTableViewSectionedAnimatedDataSource<TimelineSection>(
+            animationConfiguration: AnimationConfiguration(
+                insertAnimation: .fade,
+                reloadAnimation: .fade,
+                deleteAnimation: .fade
+            ),
+            configureCell: constructCell
+        )
     }
     
     required init?(coder: NSCoder)
@@ -83,8 +92,6 @@ class TimelineViewController : UIViewController
         tableView.register(UINib.init(nibName: "ShortTimelineCell", bundle: Bundle.main), forCellReuseIdentifier: ShortTimelineCell.cellIdentifier)
         
         setTableViewContentInsets()
-        
-        dataSource.configureCell = constructCell
         
         createBindings()
     }

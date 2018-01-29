@@ -18,7 +18,7 @@ class NewGoalPresenter: NSObject
         let presenter = NewGoalPresenter(viewModelLocator: viewModelLocator)
         let viewModel = viewModelLocator.getNewGoalViewModel(goalToBeEdited: goalToBeEdited)
         
-        let viewController = StoryboardScene.Goal.instantiateNewGoal()
+        let viewController = StoryboardScene.Goal.newGoal.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModel)
         presenter.viewController = viewController
         

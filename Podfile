@@ -11,7 +11,7 @@ target 'teferi' do
     pod 'SnapKit', '~> 4.0.0'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'JTAppleCalendar', '7.0'
+    pod 'JTAppleCalendar', '7.1.5'
     pod 'SwiftGen'
     pod 'SwiftLint'
     pod 'RxDataSources', '~> 3.0'

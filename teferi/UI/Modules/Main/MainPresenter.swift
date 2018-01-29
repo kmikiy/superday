@@ -18,7 +18,7 @@ class MainPresenter : NSObject
     {
         let presenter = MainPresenter(viewModelLocator: viewModelLocator)
         
-        let viewController = StoryboardScene.Main.instantiateMain()
+        let viewController = StoryboardScene.Main.main.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModelLocator.getMainViewModel())
         
         presenter.viewController = viewController

@@ -95,7 +95,7 @@ class SummaryPageViewController: UIPageViewController, UIPageViewControllerDataS
     // MARK: - Helper
     private func newDailySummaryViewController(forDate date: Date) -> DailySummaryViewController
     {
-        let dailySummarryViewController = StoryboardScene.DailySummary.instantiateDailySummary()
+        let dailySummarryViewController = StoryboardScene.DailySummary.dailySummary.instantiate()
         dailySummarryViewController.inject(viewModel: viewModelLocator.getDailySummaryViewModel(forDate: date))
         return dailySummarryViewController
     }

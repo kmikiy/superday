@@ -22,7 +22,7 @@ class PermissionPresenter
     {
         let presenter = PermissionPresenter(viewModelLocator: viewModelLocator)
         
-        let viewController = StoryboardScene.Main.instantiatePermission()
+        let viewController = StoryboardScene.Main.permission.instantiate()
         let viewModel = permissionViewModel(forType: type, viewModelLocator: viewModelLocator)
         viewController.inject(presenter: presenter, viewModel: viewModel)
         

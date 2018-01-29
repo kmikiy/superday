@@ -19,7 +19,7 @@ class TimeslotDetailPresenter: NSObject
         let presenter = TimeslotDetailPresenter(viewModelLocator: viewModelLocator)
         let viewModel = viewModelLocator.getTimeslotDetailViewModel(for: startDate, isShowingSubSlot: isShowingSubSlot, updateStartDateSubject: updateStartDateSubject)
         
-        let viewController = StoryboardScene.Main.instantiateEditTimeslot()
+        let viewController = StoryboardScene.Main.editTimeslot.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModel)
         presenter.viewController = viewController
         

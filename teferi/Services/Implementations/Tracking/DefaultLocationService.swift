@@ -60,7 +60,7 @@ class DefaultLocationService : NSObject, LocationService
     // MARK: Public Methods
     var alwaysAuthorizationGranted: Observable<Bool>
     {
-        return locationManager.rx.didChangeAuthorization
+        return locationManager.rx.didChangeAuthorizationStatus
             .map { $0 == CLAuthorizationStatus.authorizedAlways }
     }
     

@@ -17,7 +17,7 @@ class CalendarPresenter
     {
         let presenter = CalendarPresenter(viewModelLocator: viewModelLocator, dismissCallBack: dismissCallback)
         
-        let viewController = StoryboardScene.Main.instantiateCalendar()
+        let viewController = StoryboardScene.Main.calendar.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModelLocator.getCalendarViewModel())
         
         presenter.viewController = viewController

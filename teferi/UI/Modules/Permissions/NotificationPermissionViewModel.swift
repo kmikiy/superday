@@ -81,7 +81,7 @@ class NotificationPermissionViewModel : PermissionViewModel
                 self.settingsService.setUserRejectedNotificationPermission()
             }
             
-            self.hideOverlaySubject.on(.next())
+            self.hideOverlaySubject.on(.next(()))
         }
     }
     

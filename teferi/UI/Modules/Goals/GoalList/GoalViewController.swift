@@ -7,15 +7,24 @@ class GoalViewController: UIViewController
     private let disposeBag = DisposeBag()
     private var viewModel : GoalViewModel!
     private var presenter : GoalPresenter!
+    private var dataSource: RxTableViewSectionedAnimatedDataSource<GoalSection>!
     
-    @IBOutlet private var tableView : UITableView!
-    private let dataSource = GoalDataSource()
+    @IBOutlet private var tableView : UITableView!    
     private let header = GoalHeader.fromNib()
     
     func inject(presenter: GoalPresenter, viewModel: GoalViewModel)
     {
         self.presenter = presenter
         self.viewModel = viewModel
+        
+        dataSource = RxTableViewSectionedAnimatedDataSource<GoalSection>(
+            animationConfiguration: AnimationConfiguration(
+                insertAnimation: .fade,
+                reloadAnimation: .fade,
+                deleteAnimation: .fade
+            ),
+            configureCell: constructCell
+        )
     }
     
     override func viewDidLoad()
@@ -37,8 +46,6 @@ class GoalViewController: UIViewController
         tableView.tableFooterView = footerView
         
         tableView.addTopShadow()
-        
-        dataSource.configureCell = constructCell
         
         createBindings()
     }
