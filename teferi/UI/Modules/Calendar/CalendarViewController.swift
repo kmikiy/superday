@@ -228,8 +228,8 @@ extension CalendarViewController: JTAppleCalendarViewDelegate
 {
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell
     {
-        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: calendarCell, for: indexPath)
-        //update(cell: calendarCell, toDate: date, row: cellState.row(), belongsToMonth: cellState.dateBelongsTo == .thisMonth)
+        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: calendarCell, for: indexPath) as! CalendarCell
+        update(cell: cell, toDate: date, row: cellState.row(), belongsToMonth: cellState.dateBelongsTo == .thisMonth)
         return cell
     }
     
