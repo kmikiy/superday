@@ -15,7 +15,7 @@ class CoreDataPersistencyService<T> : BasePersistencyService<T>
         let range = fullName.range(of: ".", options: .backwards)
         if let range = range
         {
-            return fullName.substring(from: range.upperBound)
+            return String(fullName[range.upperBound...])
         }
         else
         {
