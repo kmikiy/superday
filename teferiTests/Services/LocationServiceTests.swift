@@ -41,7 +41,7 @@ class LocationServiceTests: XCTestCase
         observer = scheduler.createObserver(TrackEvent.self)
         locationService.eventObservable
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
     }
     

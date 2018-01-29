@@ -66,7 +66,7 @@ class MainViewModelTests : XCTestCase
         
         viewModel.calendarDay
             .subscribe(dateLabelObserver)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
     }
     

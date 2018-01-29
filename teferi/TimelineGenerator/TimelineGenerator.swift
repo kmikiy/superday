@@ -55,7 +55,7 @@ class TimelineGenerator
                     self.returnSubject.onCompleted()
             }
             )
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         return returnSubject
             .observeOn(MainScheduler.instance)

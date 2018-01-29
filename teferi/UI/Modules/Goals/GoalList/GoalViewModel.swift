@@ -89,8 +89,8 @@ class GoalViewModel
         refreshObservable
             .map(getGoals)
             .map(withMissingDateGoals)
-            .bindTo(goals)
-            .addDisposableTo(disposeBag)
+            .bind(to: goals)
+            .disposed(by: disposeBag)
     }
     
     func isCurrentGoal(_ goal: Goal?) -> Bool

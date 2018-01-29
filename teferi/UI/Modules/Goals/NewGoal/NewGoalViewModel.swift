@@ -70,7 +70,7 @@ class NewGoalViewModel
                 .subscribe(onNext: { [unowned self] hasPermission in
                     completion(!hasPermission && !self.settingsService.didAlreadyShowRequestForNotificationsInNewGoal)
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
         }
         
         if let reminderText = categorySelectedVariable.value?.notificationReminderText, timeService.now.hour < 20 {

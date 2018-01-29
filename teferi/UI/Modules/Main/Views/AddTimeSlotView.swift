@@ -65,11 +65,11 @@ class AddTimeSlotView : UIView
         //Bindings
         categoryObservable
             .subscribe(onNext: onNewCategory)
-            .addDisposableTo(disposeBag!)
+            .disposed(by: disposeBag!)
         
         addButton.rx.tap
             .subscribe(onNext: onAddButtonTapped)
-            .addDisposableTo(disposeBag!)
+            .disposed(by: disposeBag!)
     }
     
     override func layoutSubviews()

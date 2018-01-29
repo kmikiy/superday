@@ -47,7 +47,7 @@ class TimeslotDetailViewModel
         
         self.updateStartDateSubject.asObservable().subscribe(onNext: { [unowned self] (date) in
             self.startDate = date
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         
         let newTimeSlotForThisDate = timeSlotService.timeSlotCreatedObservable
             .filter(belogsToDate)
@@ -69,8 +69,8 @@ class TimeslotDetailViewModel
         refreshObservable
             .map(timeSlotToShow)
             .map(toSlotTimelineItem)
-            .bindTo(slotTimelineItemVariable)
-            .addDisposableTo(disposeBag)
+            .bind(to: slotTimelineItemVariable)
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Public methods

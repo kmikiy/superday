@@ -15,7 +15,7 @@ extension UIColor
     
     convenience init(hexString: String)
     {
-        let hex = hexString.hasPrefix("#") ? hexString.substring(from: hexString.index(hexString.startIndex, offsetBy: 1)) : hexString
+        let hex = hexString.hasPrefix("#") ? String(hexString.dropFirst()) : hexString
         var hexInt : UInt32 = 0
         Scanner(string: hex).scanHexInt32(&hexInt)
         
@@ -31,9 +31,7 @@ extension UIColor
         
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
         
-        let rgb = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
-        
-        return String(format:"#%06x", rgb)
+        return String(format:"#%02X%02X%02X", Int(r * 0xff), Int(g * 0xff), Int(b * 0xff))
     }
 }
 

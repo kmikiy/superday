@@ -48,7 +48,7 @@ class TimelineViewModelTests : XCTestCase
         observer = scheduler.createObserver([TimelineItem].self)
         viewModel.timelineItemsObservable
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     override func tearDown()
@@ -137,7 +137,7 @@ class TimelineViewModelTests : XCTestCase
         observer = scheduler.createObserver([TimelineItem].self)
         viewModel.timelineItemsObservable
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         
         timeSlotService.update(timeSlots: [ts], withCategory: .leisure)
@@ -170,7 +170,7 @@ class TimelineViewModelTests : XCTestCase
         observer = scheduler.createObserver([TimelineItem].self)
         viewModel.timelineItemsObservable
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         addTimeSlot(minutesAfterNoon: Int(20))
         expect(self.observer.events.count).to(equal(1)) //just initial one
@@ -186,12 +186,12 @@ class TimelineViewModelTests : XCTestCase
         let observer:TestableObserver<(CGPoint, SlotTimelineItem)> = scheduler.createObserver((CGPoint, SlotTimelineItem).self)
         editStateService.beganEditingObservable
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         let timelineItemsObserver: TestableObserver<[TimelineItem]> = scheduler.createObserver([TimelineItem].self)
         viewModel.timelineItemsObservable
             .subscribe(timelineItemsObserver)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         let items = timelineItemsObserver.events.last!.value.element!.flatMap({ $0.slotTimelineItem })
         
