@@ -107,12 +107,12 @@ Do use it in initializers when a parameter name matches a property name and clos
 ```swift
 class Foo
 {
-  private let bar: Int
+    private let bar: Int
 
-  init(bar:Int)
-  {
-    self.bar = bar
-  }
+    init(bar:Int)
+    {
+        self.bar = bar
+    }
 }
 ```
 
@@ -287,68 +287,68 @@ func animateTransition(using transitionContext: UIViewControllerContextTransitio
         }
     }
 
-    private func presentModal(transitionContext: UIViewControllerContextTransitioning)
-    {
-        let toController = transitionContext.viewController(forKey: .to)!
-        let animationDuration = transitionDuration(using: transitionContext)
+private func presentModal(transitionContext: UIViewControllerContextTransitioning)
+{
+    let toController = transitionContext.viewController(forKey: .to)!
+    let animationDuration = transitionDuration(using: transitionContext)
 
-        transitionContext.containerView.addSubview(toController.view)
+    transitionContext.containerView.addSubview(toController.view)
 
-        let finalFrame = transitionContext.finalFrame(for: toController)
-        toController.view.frame = finalFrame.offsetBy(dx: 0, dy: transitionContext.containerView.frame.height)
-        toController.view.alpha = 0.5
+    let finalFrame = transitionContext.finalFrame(for: toController)
+    toController.view.frame = finalFrame.offsetBy(dx: 0, dy: transitionContext.containerView.frame.height)
+    toController.view.alpha = 0.5
 
-        UIView.animate(
-            {
-                toController.view.frame = finalFrame
-                toController.view.alpha = 1.0
-        },
-            duration: animationDuration,
-            delay: 0,
-            options: [],
-            withControlPoints: 0.175, 0.885, 0.32, 1.14,
-            completion: {
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
-    }
+    UIView.animate(
+        {
+            toController.view.frame = finalFrame
+            toController.view.alpha = 1.0
+    },
+        duration: animationDuration,
+        delay: 0,
+        options: [],
+        withControlPoints: 0.175, 0.885, 0.32, 1.14,
+        completion: {
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+    })
+}
 
-    private func dismissModal(transitionContext: UIViewControllerContextTransitioning)
-    {
-        let fromController = transitionContext.viewController(forKey: .from)!
-        let animationDuration = transitionDuration(using: transitionContext)
-        let initialFrame = transitionContext.initialFrame(for: fromController)
-        let finalFrame = initialFrame.offsetBy(dx: 0, dy: transitionContext.containerView.frame.height)
+private func dismissModal(transitionContext: UIViewControllerContextTransitioning)
+{
+    let fromController = transitionContext.viewController(forKey: .from)!
+    let animationDuration = transitionDuration(using: transitionContext)
+    let initialFrame = transitionContext.initialFrame(for: fromController)
+    let finalFrame = initialFrame.offsetBy(dx: 0, dy: transitionContext.containerView.frame.height)
 
-        UIView.animate(
-            {
-                fromController.view.frame = finalFrame
-                fromController.view.alpha = 0.5
-        },
-            duration: animationDuration,
-            delay: 0,
-            options: [],
-            withControlPoints: 0.4, 0.0, 0.6, 1,
-            completion: {
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
-    }
+    UIView.animate(
+        {
+            fromController.view.frame = finalFrame
+            fromController.view.alpha = 0.5
+    },
+        duration: animationDuration,
+        delay: 0,
+        options: [],
+        withControlPoints: 0.4, 0.0, 0.6, 1,
+        completion: {
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+    })
+}
 
-    private func dismissModalInteractively(transitionContext: UIViewControllerContextTransitioning)
-    {
-        let fromController = transitionContext.viewController(forKey: .from)!
-        let animationDuration = transitionDuration(using: transitionContext)
-        let initialFrame = transitionContext.initialFrame(for: fromController)
-        let finalFrame = initialFrame.offsetBy(dx: 0, dy: transitionContext.containerView.frame.height)
+private func dismissModalInteractively(transitionContext: UIViewControllerContextTransitioning)
+{
+    let fromController = transitionContext.viewController(forKey: .from)!
+    let animationDuration = transitionDuration(using: transitionContext)
+    let initialFrame = transitionContext.initialFrame(for: fromController)
+    let finalFrame = initialFrame.offsetBy(dx: 0, dy: transitionContext.containerView.frame.height)
 
-        UIView.animate(
-            withDuration: animationDuration,
-            animations: {
-                fromController.view.frame = finalFrame
-        },
-            completion: { p in
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
-    }
+    UIView.animate(
+        withDuration: animationDuration,
+        animations: {
+            fromController.view.frame = finalFrame
+    },
+        completion: { p in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+    })
+}
 
 ```
 
