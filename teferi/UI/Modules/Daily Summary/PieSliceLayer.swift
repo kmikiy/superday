@@ -5,7 +5,7 @@ class PieSliceLayer: CALayer
     @NSManaged var startAngle: CGFloat
     @NSManaged var endAngle: CGFloat
     
-    private var fillColor: Color = .gray
+    private var fillColor: UIColor = UIColor.gray
     var category: Category!
     {
         didSet

@@ -31,12 +31,12 @@ class EnableNotificationsViewController: UIViewController
         
         closeButton.rx.tap
             .subscribe(onNext: presenter.dismiss)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         button.rx.tap
             .do(onNext: viewModel.getNotificationPermissions)
             .subscribe(onNext: presenter.dismiss)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
     }
 }

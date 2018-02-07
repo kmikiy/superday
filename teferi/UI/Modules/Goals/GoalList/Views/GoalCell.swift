@@ -31,7 +31,7 @@ class GoalCell: UITableViewCell
             if goal.category == .unknown
             {
                 categoryLabel.text = "No goal"
-                categoryLabel.textColor = Color.lightGray
+                categoryLabel.textColor = UIColor.lightGray
                 
                 progressIndicator.progress = 0
                 durationLabel.text = nil
@@ -42,7 +42,7 @@ class GoalCell: UITableViewCell
                 let completion = goal.targetTime == 0 ? 0 : Float(goal.timeSoFar / goal.targetTime)
                 
                 categoryLabel.text = goal.category.description + (completion >= 1 ? "🏆" : "")
-                categoryLabel.textColor = Color.almostBlack
+                categoryLabel.textColor = UIColor.almostBlack
                 
                 progressIndicator.tintColor = goal.category.color
                 progressIndicator.layer.cornerRadius = 2

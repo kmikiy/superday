@@ -119,7 +119,7 @@ class DefaultSettingsService : SettingsService
     {
         if let archive = UserDefaults.standard.value(forKey: lastUsedGoalAchivedMessageAndDateKey) as? NSData
         {
-            return NSKeyedUnarchiver.unarchiveObject(with: archive as Data) as! [Date: String]
+            return NSKeyedUnarchiver.unarchiveObject(with: archive as Data) as? [Date: String]
         }
         
         return nil

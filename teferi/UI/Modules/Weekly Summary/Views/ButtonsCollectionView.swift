@@ -44,10 +44,10 @@ class ButtonsCollectionView: UICollectionView
         self.layoutIfNeeded()
 
         categories
-            .bindTo(self.rx.items(cellIdentifier: "categoryButtonCell", cellType:ButtonCollectionViewCell.self))
+            .bind(to: self.rx.items(cellIdentifier: "categoryButtonCell", cellType:ButtonCollectionViewCell.self))
             { _, data, cell in
                 cell.model = data
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }

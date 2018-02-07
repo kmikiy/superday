@@ -56,7 +56,7 @@ class MainViewController : UIViewController, MFMailComposeViewControllerDelegate
             .subscribe(onNext: { [unowned self] in
                 self.presenter.toggleCalendar()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         setupNavigationBar()
         
@@ -90,53 +90,53 @@ class MainViewController : UIViewController, MFMailComposeViewControllerDelegate
         viewModel
             .isEditingObservable
             .subscribe(onNext: onEditChanged)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel
             .beganEditingObservable
             .subscribe(onNext: editView.onEditBegan)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         //Category creation
         addButton
             .categoryObservable
             .subscribe(onNext: viewModel.addNewSlot)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         editView
             .editEndedObservable
             .subscribe(onNext: viewModel.updateSlotTimelineItem)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel
             .dateObservable
             .subscribe(onNext: onDateChanged)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.showPermissionControllerObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: presenter.showPermissionController)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.welcomeMessageHiddenObservable
-            .bindTo(welcomeMessageView.rx.isHidden)
-            .addDisposableTo(disposeBag)
+            .bind(to: welcomeMessageView.rx.isHidden)
+            .disposed(by: disposeBag)
         
         viewModel.moveToForegroundObservable
             .subscribe(onNext: onBecomeActive)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.locating
-            .bindTo(LoadingView.locating.rx.isActive)
-            .addDisposableTo(disposeBag)
+            .bind(to: LoadingView.locating.rx.isActive)
+            .disposed(by: disposeBag)
         
         viewModel.generating
-            .bindTo(LoadingView.generating.rx.isActive)
-            .addDisposableTo(disposeBag)
+            .bind(to: LoadingView.generating.rx.isActive)
+            .disposed(by: disposeBag)
         
         viewModel.calendarDay
-            .bindTo(calendarButton.rx.title(for: .normal))
-            .addDisposableTo(disposeBag)
+            .bind(to: calendarButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
         
         viewModel.showAddGoalAlert
             .subscribe(onNext: { [unowned self] show in
@@ -146,7 +146,7 @@ class MainViewController : UIViewController, MFMailComposeViewControllerDelegate
                     AddGoalAlert.hide()
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private func addGoalAlertTap()

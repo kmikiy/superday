@@ -28,7 +28,7 @@ class CMAccessForExistingUsersViewController: UIViewController
         
         enableButton.rx.tap
             .subscribe(onNext: getUserPermission)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         initializeBindings()
     }
@@ -49,7 +49,7 @@ class CMAccessForExistingUsersViewController: UIViewController
     {
         viewModel.hideOverlayObservable
             .subscribe(onNext: hideOverlay)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func hideOverlay()

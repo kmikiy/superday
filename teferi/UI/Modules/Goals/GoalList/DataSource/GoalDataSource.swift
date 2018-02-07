@@ -32,17 +32,3 @@ extension Goal: IdentifiableType, Equatable
             && lhs.targetTime == rhs.targetTime
     }
 }
-
-class GoalDataSource: RxTableViewSectionedAnimatedDataSource<GoalSection>
-{
-    override init()
-    {
-        super.init()
-        
-        self.animationConfiguration = AnimationConfiguration(
-            insertAnimation: .fade,
-            reloadAnimation: .fade,
-            deleteAnimation: .fade
-        )
-    }
-}

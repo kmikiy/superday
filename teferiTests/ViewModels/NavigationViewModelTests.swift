@@ -41,7 +41,7 @@ class NavigationViewModelTests : XCTestCase
         let observer = scheduler.createObserver(String.self)
         viewModel.title
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         let today = timeService.mockDate!
         selectedDateService.currentlySelectedDate = today
@@ -54,7 +54,7 @@ class NavigationViewModelTests : XCTestCase
         let observer = scheduler.createObserver(String.self)
         viewModel.title
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         let yesterday = timeService.mockDate!.yesterday
         selectedDateService.currentlySelectedDate = yesterday
@@ -67,7 +67,7 @@ class NavigationViewModelTests : XCTestCase
         let observer = scheduler.createObserver(String.self)
         viewModel.title
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         let olderDate = Date().add(days: -2)
         selectedDateService.currentlySelectedDate = olderDate
@@ -87,7 +87,7 @@ class NavigationViewModelTests : XCTestCase
         let observer = scheduler.createObserver(String.self)
         viewModel.title
             .subscribe(observer)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         let today = timeService.mockDate!
         selectedDateService.currentlySelectedDate = today

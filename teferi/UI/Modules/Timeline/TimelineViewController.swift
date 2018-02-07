@@ -36,7 +36,7 @@ class TimelineViewController : UIViewController
         }
     }
     
-    private let dataSource = TimelineDataSource()
+    private var dataSource: RxTableViewSectionedAnimatedDataSource<TimelineSection>!
 
     // MARK: Initializers
     init(presenter: TimelinePresenter, viewModel: TimelineViewModel)
@@ -45,6 +45,15 @@ class TimelineViewController : UIViewController
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
+        dataSource = RxTableViewSectionedAnimatedDataSource<TimelineSection>(
+            animationConfiguration: AnimationConfiguration(
+                insertAnimation: .fade,
+                reloadAnimation: .fade,
+                deleteAnimation: .fade
+            ),
+            configureCell: constructCell
+        )
     }
     
     required init?(coder: NSCoder)
@@ -83,8 +92,6 @@ class TimelineViewController : UIViewController
         tableView.register(UINib.init(nibName: "ShortTimelineCell", bundle: Bundle.main), forCellReuseIdentifier: ShortTimelineCell.cellIdentifier)
         
         setTableViewContentInsets()
-        
-        dataSource.configureCell = constructCell
         
         createBindings()
     }
@@ -128,18 +135,18 @@ class TimelineViewController : UIViewController
     {
         viewModel.timelineItemsObservable
             .map({ [TimelineSection(items:$0)] })
-            .bindTo(tableView.rx.items(dataSource: dataSource))
-            .addDisposableTo(disposeBag)
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
         
         viewModel.timelineItemsObservable
             .map{$0.count > 0}
-            .bindTo(emptyStateView.rx.isHidden)
-            .addDisposableTo(disposeBag)
+            .bind(to: emptyStateView.rx.isHidden)
+            .disposed(by: disposeBag)
         
         tableView.rx
             .modelSelected(TimelineItem.self)
             .subscribe(onNext: handleTableViewSelection )
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         tableView.rx.willDisplayCell
             .subscribe(onNext: { [unowned self] (cell, indexPath) in
@@ -148,7 +155,7 @@ class TimelineViewController : UIViewController
                 (cell as! TimelineCell).animateIntro()
                 self.willDisplayNewCell = false
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         let oldOffset = tableView.rx.contentOffset.map({ $0.y })
         let newOffset = tableView.rx.contentOffset.skip(1).map({ $0.y })
@@ -169,7 +176,7 @@ class TimelineViewController : UIViewController
                 let topInset = self.tableView.contentInset.top
                 self.delegate?.didScroll(oldOffset: old + topInset, newOffset: new + topInset)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.didBecomeActiveObservable
             .subscribe(onNext: { [unowned self] in
@@ -178,11 +185,11 @@ class TimelineViewController : UIViewController
                     self.showVottingUI()
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.dailyVotingNotificationObservable
             .subscribe(onNext: onNotificationOpen)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private func handleTableViewSelection(timelineItem: TimelineItem)
@@ -223,7 +230,7 @@ class TimelineViewController : UIViewController
         
         voteView.setVoteObservable
             .subscribe(onNext: viewModel.setVote)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private func onNotificationOpen(on date: Date)
@@ -268,7 +275,7 @@ class TimelineViewController : UIViewController
                     return (position, item)
                 }
                 .subscribe(onNext: self.viewModel.notifyEditingBegan)
-                .addDisposableTo(cell.disposeBag)
+                .disposed(by: cell.disposeBag)
             
             return cell
             
@@ -298,7 +305,7 @@ class TimelineViewController : UIViewController
                     return (position, item)
                 }
                 .subscribe(onNext: self.viewModel.notifyEditingBegan)
-                .addDisposableTo(cell.disposeBag)
+                .disposed(by: cell.disposeBag)
             
             return cell
             
@@ -317,7 +324,7 @@ class TimelineViewController : UIViewController
             
             cell.collapseObservable
                 .subscribe(onNext: viewModel.collapseSlots )
-                .addDisposableTo(cell.disposeBag)
+                .disposed(by: cell.disposeBag)
             
             return cell
             

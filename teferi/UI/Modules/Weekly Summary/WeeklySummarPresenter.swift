@@ -14,7 +14,7 @@ class WeeklySummaryPresenter
     {
         let presenter = WeeklySummaryPresenter(viewModelLocator: viewModelLocator)
         
-        let viewController = StoryboardScene.WeeklySummary.instantiateWeeklySummary()
+        let viewController = StoryboardScene.WeeklySummary.weeklySummary.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModelLocator.getWeeklySummaryViewModel())
         
         presenter.viewController = viewController

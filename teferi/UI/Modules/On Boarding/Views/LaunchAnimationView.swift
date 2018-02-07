@@ -55,7 +55,7 @@ class LaunchAnimationView : UIView
     }
     
     // MARK: Actions
-    func animate(onCompleted: @escaping (Void) -> Void)
+    func animate(onCompleted: @escaping () -> ())
     {
         let animationOrder = [0, 8, 2, 6, 1, 7, 3, 5, 4]
         
@@ -70,7 +70,7 @@ class LaunchAnimationView : UIView
         
         animateDot(dots[animationOrder[8]], duration: lastDuration, delay: 8 * interval)
 
-        Timer.schedule(withDelay: duration * 5) { _ in onCompleted() }
+        Timer.schedule(withDelay: duration * 5) {  onCompleted() }
     }
     
     private func animateDot(_ dot: CALayer, duration: Double, delay: Double)

@@ -14,12 +14,12 @@ whitelist_rules:
 custom_rules:
   brace_on_new_line: # rule identifier
     name: "Brace on new line" # rule name. optional.
-    regex: "(class|struct|enum|protocol|extension)[ :][^\n]*\{"
+    regex: '(class|struct|enum|protocol|extension)[ :][^\n]*\{'
     message: "Opening braces for classes, structs, protocols, enums and extensions must be on a new line" # violation message. optional.
     severity: error # violation severity. optional.
   func_brace_on_new_line:
     name: "Func brace on new line" # rule name. optional.
-    regex: "(func|init)[ \!\?\(][^\n]*\{(?![^\n]*\})"
+    regex: '(func|init)[ \!\?\(][^\n]*\{(?![^\n]*\})'
     message: "Opening braces for functions and methods must be on a new line" # violation message. optional.
     severity: error # violation severity. optional.
 included: # paths to include during linting. `--path` is ignored if present.

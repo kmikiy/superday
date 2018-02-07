@@ -45,7 +45,7 @@ class OnboardingPage2 : OnboardingPage
         editedCell = createTimelineCell(for: editedTimeSlot)
         editedCell.alpha = 0
         
-        touchCursor = UIImageView(image: UIImage(asset: .icCursor))
+        touchCursor = UIImageView(image: Asset.icCursor.image)
         touchCursor.alpha = 0
     }
     

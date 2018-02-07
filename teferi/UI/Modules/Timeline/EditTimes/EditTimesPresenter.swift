@@ -16,7 +16,7 @@ class EditTimesPresenter
         let presenter = EditTimesPresenter(viewModelLocator: viewModelLocator)
         let viewModel = viewModelLocator.getEditTimesViewModel(for: firstTimeSlot, secondTimeSlot: secondTimeSlot, editingStartTime: editingStartTime, updateStartDateSubject: updateStartDateSubject)
         
-        let viewController = StoryboardScene.Main.instantiateEditTimes()
+        let viewController = StoryboardScene.Main.editTimes.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModel)
         presenter.viewController = viewController
         

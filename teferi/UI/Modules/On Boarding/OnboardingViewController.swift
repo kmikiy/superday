@@ -100,7 +100,7 @@ class OnboardingViewController: UIPageViewController
     {
         let page = StoryboardScene
                     .Onboarding
-                    .storyboard()
+                    .storyboard
                     .instantiateViewController(withIdentifier: "OnboardingScreen\(id)") as! OnboardingPage
         
         page.inject(viewModel: viewModel.pageViewModel(), onboardingPageViewController: self)

@@ -7,15 +7,24 @@ class GoalViewController: UIViewController
     private let disposeBag = DisposeBag()
     private var viewModel : GoalViewModel!
     private var presenter : GoalPresenter!
+    private var dataSource: RxTableViewSectionedAnimatedDataSource<GoalSection>!
     
-    @IBOutlet private var tableView : UITableView!
-    private let dataSource = GoalDataSource()
+    @IBOutlet private var tableView : UITableView!    
     private let header = GoalHeader.fromNib()
     
     func inject(presenter: GoalPresenter, viewModel: GoalViewModel)
     {
         self.presenter = presenter
         self.viewModel = viewModel
+        
+        dataSource = RxTableViewSectionedAnimatedDataSource<GoalSection>(
+            animationConfiguration: AnimationConfiguration(
+                insertAnimation: .fade,
+                reloadAnimation: .fade,
+                deleteAnimation: .fade
+            ),
+            configureCell: constructCell
+        )
     }
     
     override func viewDidLoad()
@@ -38,8 +47,6 @@ class GoalViewController: UIViewController
         
         tableView.addTopShadow()
         
-        dataSource.configureCell = constructCell
-        
         createBindings()
     }
 
@@ -53,7 +60,7 @@ class GoalViewController: UIViewController
             .subscribe(onNext: { [unowned self] in
                 self.presenter.showEditGoal(withGoal: goal)
             })
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         
         return buttonItem
     }
@@ -62,27 +69,27 @@ class GoalViewController: UIViewController
     {
         viewModel.goalsObservable
             .map({ [GoalSection(items:$0)] })
-            .bindTo(tableView.rx.items(dataSource: dataSource))
-            .addDisposableTo(disposeBag)
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
 
         viewModel.todaysGoal
             .map(barButtonItem)
             .subscribe(onNext: {
                 self.navigationItem.rightBarButtonItem = $0
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.lastGoal
             .subscribe(onNext: { goal in
                 self.header.configure(withViewModel: self.viewModel, andGoal: goal)
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         header.newGoalButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.presenter.showNewGoalUI()
             })
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
         
         viewModel.suggestionObservable
             .subscribe(onNext: { [unowned self] suggestion in
@@ -92,7 +99,7 @@ class GoalViewController: UIViewController
                 }
                 GoalSuggestionAlert(inViewController: self, text: suggestion).show()
             })
-            .addDisposableTo(self.disposeBag)
+            .disposed(by: self.disposeBag)
     }
 
     private func constructCell(dataSource: TableViewSectionedDataSource<GoalSection>,

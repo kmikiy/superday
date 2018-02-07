@@ -18,17 +18,3 @@ extension TimelineSection: AnimatableSectionModelType
     
     var identity: String { return "" }
 }
-
-class TimelineDataSource: RxTableViewSectionedAnimatedDataSource<TimelineSection>
-{
-    override init()
-    {        
-        super.init()
-        
-        self.animationConfiguration = AnimationConfiguration(
-            insertAnimation: .fade,
-            reloadAnimation: .fade,
-            deleteAnimation: .fade
-        )
-    }
-}

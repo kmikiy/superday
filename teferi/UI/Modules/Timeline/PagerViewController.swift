@@ -78,26 +78,26 @@ class PagerViewController : UIPageViewController
         viewModel.dateObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: onDateChanged)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.isEditingObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: onEditChanged)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.newDayObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: newDay)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.dailyVotingNotificationDateObservable
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: showNotificationDay)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
                 
         viewModel.activitiesObservable
             .drive(onNext: headerView.setActivities)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     private func onEditChanged(_ isEditing: Bool)

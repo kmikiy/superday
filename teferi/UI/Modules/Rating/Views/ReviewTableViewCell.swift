@@ -28,14 +28,14 @@ class ReviewTableViewCell: UITableViewCell
         let attributedTimeString = NSMutableAttributedString()
         
         let hoursAndMinutesAttributedString = NSMutableAttributedString(string: String(format: hourAndMisnutesMask, hours, minutes))
-        hoursAndMinutesAttributedString.addAttributes([NSFontAttributeName : UIFont.systemFont(ofSize: 14),
-                                                       NSForegroundColorAttributeName : UIColor.init(r: 94, g: 91, b: 91)],
+        hoursAndMinutesAttributedString.addAttributes([NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+                                                       NSAttributedStringKey.foregroundColor : UIColor.init(r: 94, g: 91, b: 91)],
                                                       range: NSMakeRange(0, hoursAndMinutesAttributedString.length))
         attributedTimeString.append(hoursAndMinutesAttributedString)
         
         let secondsAttributedString = NSMutableAttributedString(string: String(format: secondsMask, seconds))
-        secondsAttributedString.addAttributes([NSFontAttributeName : UIFont.systemFont(ofSize: 14),
-                                               NSForegroundColorAttributeName : UIColor.init(r: 206, g: 205, b: 205)],
+        secondsAttributedString.addAttributes([NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14),
+                                               NSAttributedStringKey.foregroundColor : UIColor.init(r: 206, g: 205, b: 205)],
                                               range: NSMakeRange(0, secondsAttributedString.length))
         attributedTimeString.append(secondsAttributedString)
         

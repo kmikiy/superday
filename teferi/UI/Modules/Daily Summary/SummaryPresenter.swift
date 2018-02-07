@@ -8,7 +8,7 @@ class SummaryPresenter
     {
         let presenter = SummaryPresenter()
         
-        let viewController = StoryboardScene.DailySummary.instantiateSummary()
+        let viewController = StoryboardScene.DailySummary.summary.instantiate()
         
         viewController.inject(viewModelLocator: viewModelLocator)
         

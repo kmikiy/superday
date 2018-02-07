@@ -79,8 +79,8 @@ class TimelineViewModel
         refreshObservable
             .map(timeSlotsForToday)
             .map(toTimelineItems)
-            .bindTo(timelineItems)
-            .addDisposableTo(disposeBag)
+            .bind(to: timelineItems)
+            .disposed(by: disposeBag)
 
     }
     

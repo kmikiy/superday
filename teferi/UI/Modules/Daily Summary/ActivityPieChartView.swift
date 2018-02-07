@@ -16,7 +16,7 @@ class ActivityPieChartView: UIView
         return min(self.bounds.width, self.bounds.height) / 3
     }
     
-    @IBInspectable var centerCircleColor: Color = .white
+    @IBInspectable var centerCircleColor: UIColor = UIColor.white
     {
         didSet
         {
@@ -37,13 +37,13 @@ class ActivityPieChartView: UIView
     
     private lazy var centerCircleLayer: CAShapeLayer = {
         let circleLayer = CAShapeLayer()
-        circleLayer.fillColor = Color.white.cgColor
+        circleLayer.fillColor = UIColor.white.cgColor
         return circleLayer
     }()
     
     private lazy var backgroundCircleLayer: CAShapeLayer = {
         let circleLayer = CAShapeLayer()
-        circleLayer.fillColor = Color.init(white: 0.9, alpha: 1).cgColor
+        circleLayer.fillColor = UIColor.init(white: 0.9, alpha: 1).cgColor
         return circleLayer
     }()
     

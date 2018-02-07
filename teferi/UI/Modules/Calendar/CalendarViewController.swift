@@ -42,28 +42,27 @@ class CalendarViewController : UIViewController
         super.viewDidLoad()
                 
         //Configures the calendar
-        calendarView.dataSource = self
-        calendarView.delegate = self
-        calendarView.registerCellViewXib(file: calendarCell)
-        calendarView.cellInset = CGPoint(x: 1.5, y: 2)
+        calendarView.calendarDataSource = self
+        calendarView.calendarDelegate = self
+        calendarView.register(UINib(nibName: calendarCell, bundle: nil), forCellWithReuseIdentifier: calendarCell)
         calendarView.scrollToDate(viewModel.currentVisibleMonth, animateScroll:false)
         
         leftButton.rx.tap
             .subscribe(onNext: onLeftClick)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         rightButton.rx.tap
             .subscribe(onNext: onRightClick)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel
             .currentVisibleCalendarDateObservable
             .subscribe(onNext: onCurrentCalendarDateChanged)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.dateObservable.skip(1)
             .subscribe(onNext: onCurrentlySelectedDateChanged)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         calendarView.reloadData()
     }
@@ -145,12 +144,12 @@ class CalendarViewController : UIViewController
     //MARK: Rx methods
     private func onLeftClick()
     {
-        calendarView.scrollToPreviousSegment(true, animateScroll: true, completionHandler: nil)
+        calendarView.scrollToSegment(.previous)
     }
     
     private func onRightClick()
     {
-        calendarView.scrollToNextSegment(true, animateScroll: true, completionHandler: nil)
+        calendarView.scrollToSegment(.next)
     }
     
     private func onCurrentCalendarDateChanged(_ date: Date)
@@ -189,10 +188,10 @@ class CalendarViewController : UIViewController
     {
         let monthName = DateFormatter().monthSymbols[(date.month - 1) % 12]
         let result = NSMutableAttributedString(string: "\(monthName) ",
-                                               attributes: [ NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.systemFont(ofSize: 14) ])
+                                               attributes: [ NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14) ])
         
         result.append(NSAttributedString(string: String(date.year),
-                                         attributes: [ NSForegroundColorAttributeName: Style.Color.offBlackTransparent, NSFontAttributeName: UIFont.systemFont(ofSize: 14) ]))
+                                         attributes: [ NSAttributedStringKey.foregroundColor: Style.Color.offBlackTransparent, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14) ]))
         
         return result
     }
@@ -224,7 +223,41 @@ class CalendarViewController : UIViewController
     }
 }
 
-extension CalendarViewController: JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource
+extension CalendarViewController: JTAppleCalendarViewDelegate
+{
+    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell
+    {
+        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: calendarCell, for: indexPath) as! CalendarCell
+        update(cell: cell, toDate: date, row: cellState.row(), belongsToMonth: cellState.dateBelongsTo == .thisMonth)
+        return cell
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath)
+    {
+        guard let calendarCell = cell as? CalendarCell else { return }
+        
+        update(cell: calendarCell, toDate: date, row: cellState.row(), belongsToMonth: cellState.dateBelongsTo == .thisMonth)
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState)
+    {
+        viewModel.selectedDate = date
+        calendar.reloadData()
+        
+        guard let calendarCell = cell as? CalendarCell else { return }
+        
+        update(cell: calendarCell, toDate: date, row: cellState.row(), belongsToMonth: cellState.dateBelongsTo == .thisMonth)
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo)
+    {
+        guard let startDate = visibleDates.monthDates.first?.date else { return }
+        
+        viewModel.setCurrentVisibleMonth(date: startDate)
+    }
+}
+
+extension CalendarViewController: JTAppleCalendarViewDataSource
 {
     //MARK: JTAppleCalendarDelegate implementation
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters
@@ -238,30 +271,7 @@ extension CalendarViewController: JTAppleCalendarViewDelegate, JTAppleCalendarVi
                                                  firstDayOfWeek: .monday)
         return parameters
     }
-    
-    func calendar(_ calendar: JTAppleCalendarView, willDisplayCell cell: JTAppleDayCellView, date: Date, cellState: CellState)
-    {
-        guard let calendarCell = cell as? CalendarCell else { return }
-        
-        update(cell: calendarCell, toDate: date, row: cellState.row(), belongsToMonth: cellState.dateBelongsTo == .thisMonth)
-    }
-    
-    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState)
-    {
-        viewModel.selectedDate = date
-        calendar.reloadData()
-        
-        guard let calendarCell = cell as? CalendarCell else { return }
-        
-        update(cell: calendarCell, toDate: date, row: cellState.row(), belongsToMonth: cellState.dateBelongsTo == .thisMonth)
-    }
-    
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo)
-    {
-        guard let startDate = visibleDates.monthDates.first else { return }
-        
-        viewModel.setCurrentVisibleMonth(date: startDate)
-    }
+
 }
 
 extension CalendarViewController: UIGestureRecognizerDelegate

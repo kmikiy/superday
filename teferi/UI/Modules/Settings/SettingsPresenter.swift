@@ -16,7 +16,7 @@ class SettingsPresenter
     {
         let presenter = SettingsPresenter(viewModelLocator: viewModelLocator)
         
-        let viewController = StoryboardScene.Settings.initialViewController()
+        let viewController = StoryboardScene.Settings.initialScene.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModelLocator.getSettingsViewModel(forViewController: viewController))
 
         presenter.viewController = viewController

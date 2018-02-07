@@ -19,7 +19,7 @@ class DefaultTrackEventService : TrackEventService
         Observable.from(observables)
             .merge()
             .subscribe(onNext: persistData)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     func getEventData<T : EventData>(ofType: T.Type) -> [ T ]

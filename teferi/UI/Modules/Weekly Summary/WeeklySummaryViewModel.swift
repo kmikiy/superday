@@ -141,7 +141,7 @@ extension WeeklySummaryViewModel: ChartViewDatasource
         return topCategoriesVariable.value.filter({ $0.enabled }).count
     }
     
-    func color(forLine line: Int) -> Color
+    func color(forLine line: Int) -> UIColor
     {
         return topCategoriesVariable.value.filter({ $0.enabled })[line].category.color
     }

@@ -17,7 +17,7 @@ class OnboardingPresenter
     {
         let presenter = OnboardingPresenter(viewModelLocator: viewModelLocator)
         
-        let viewController = StoryboardScene.Onboarding.instantiateOnboarding()
+        let viewController = StoryboardScene.Onboarding.onboarding.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModelLocator.getOnboardingViewModel())
         
         presenter.viewController = viewController

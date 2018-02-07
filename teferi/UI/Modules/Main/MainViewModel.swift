@@ -202,7 +202,7 @@ class MainViewModel : RxViewModel
                     .trackActivity(self.generatingTimelineActivity)
             }
             .subscribe()
-            .addDisposableTo(disposeBag)        
+            .disposed(by: disposeBag)        
 
     }
     

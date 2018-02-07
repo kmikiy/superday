@@ -32,24 +32,24 @@ class WeeklySummaryViewController: UIViewController
     {
         super.viewDidLoad()
         
-        view.backgroundColor = Color.white
+        view.backgroundColor = UIColor.white
         self.scrollView.addSubview(self.emptyStateView)
         
         previousButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.nextWeek()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         nextButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.previousWeek()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         viewModel.weekTitle
-            .bindTo(weekLabel.rx.text)
-            .addDisposableTo(disposeBag)
+            .bind(to: weekLabel.rx.text)
+            .disposed(by: disposeBag)
         
         // Chart View
         weeklyChartView.datasource = viewModel
@@ -57,12 +57,12 @@ class WeeklySummaryViewController: UIViewController
 
         viewModel.firstDayIndex
             .subscribe(onNext:weeklyChartView.setWeekStart)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         // Category Buttons
         categoryButtons.toggleCategoryObservable
             .subscribe(onNext:viewModel.toggleCategory)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         categoryButtons.categories = viewModel.topCategories
             .do(onNext: { [unowned self] _ in
@@ -76,7 +76,7 @@ class WeeklySummaryViewController: UIViewController
                 return activityWithPercentage.map { $0.0 }
             }
             .subscribe(onNext:self.pieChart.setActivities)
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         //Table view
         tableView.rowHeight = 48
@@ -90,11 +90,11 @@ class WeeklySummaryViewController: UIViewController
             .map { [unowned self] activities in
                 return activities.sorted(by: self.areInIncreasingOrder)
             }
-            .bindTo(tableView.rx.items(cellIdentifier: WeeklySummaryCategoryTableViewCell.identifier, cellType: WeeklySummaryCategoryTableViewCell.self)) {
+            .bind(to: tableView.rx.items(cellIdentifier: WeeklySummaryCategoryTableViewCell.identifier, cellType: WeeklySummaryCategoryTableViewCell.self)) {
                 _, model, cell in
                 cell.activityWithPercentage = model
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         //Empty state
         viewModel.weekActivities
@@ -102,7 +102,7 @@ class WeeklySummaryViewController: UIViewController
             .subscribe(onNext: { activityWithPercentage in
                 self.emptyStateView.isHidden = !activityWithPercentage.isEmpty
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         scrollView.addTopShadow()
 

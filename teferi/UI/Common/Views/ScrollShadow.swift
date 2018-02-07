@@ -50,7 +50,7 @@ class ScrollShadow: UIView
                 
                 self.layer.shadowOpacity = opacity
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder)

@@ -54,13 +54,13 @@ class DefaultLocationService : NSObject, LocationService
             .map(Location.init(fromCLLocation:))
             .filterNil()
             .map(Location.asTrackEvent)
-            .bindTo(eventSubject)
+            .bind(to: eventSubject)
     }
     
     // MARK: Public Methods
     var alwaysAuthorizationGranted: Observable<Bool>
     {
-        return locationManager.rx.didChangeAuthorization
+        return locationManager.rx.didChangeAuthorizationStatus
             .map { $0 == CLAuthorizationStatus.authorizedAlways }
     }
     

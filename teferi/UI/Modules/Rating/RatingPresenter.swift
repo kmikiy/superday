@@ -10,7 +10,7 @@ class RatingPresenter
     {
         let presenter = RatingPresenter()
         
-        let viewController = StoryboardScene.Rating.instantiateRating()
+        let viewController = StoryboardScene.Rating.rating.instantiate()
         
         viewController.inject(viewModel: viewModelLocator.getRatingViewModel(start: startDate, end: endDate), presenter: presenter)
         

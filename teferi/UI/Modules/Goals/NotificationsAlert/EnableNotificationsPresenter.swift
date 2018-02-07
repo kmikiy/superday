@@ -15,12 +15,11 @@ class EnableNotificationsPresenter
         let presenter = EnableNotificationsPresenter(viewModelLocator: viewModelLocator)
         let viewModel = viewModelLocator.getEnableNotificationsViewModel()
         
-        let viewController = StoryboardScene.Goal.instantiateEnableNotifications()
+        let viewController = StoryboardScene.Goal.enableNotifications.instantiate()
         viewController.inject(presenter: presenter, viewModel: viewModel)
         presenter.viewController = viewController
         
         return viewController
-        fatalError("Dont do this")
     }
     
     func dismiss()
